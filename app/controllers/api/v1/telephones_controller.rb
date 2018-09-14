@@ -5,10 +5,11 @@ module Api
 
       def create
         @telephone = Telephone.new
+        
         get_custom_value(phones_params[:phone_number])
         if @telephone.valid? 
-          render :create
           @telephone.save!
+          render :create
         else
           render json: @telephone.errors.full_messages
         end
@@ -24,9 +25,9 @@ module Api
       end
 
       def get_custom_value (custom_number)
-        if custom_number == nil
+        if custom_number.nil?
           set_random_value
-        elsif is_number_exist(custom_number))
+        elsif is_number_exist(custom_number)
           set_random_value
         else
           set_custom_value (custom_number)
