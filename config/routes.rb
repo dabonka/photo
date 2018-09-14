@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1, defaults: { format: 'json' } do
       resources :apidocs, only: [:index]
-      resources :entries
+      resources :telephones
     end
   end
 end

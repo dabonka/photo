@@ -15,11 +15,11 @@ ActiveRecord::Schema.define(version: 2018_09_14_121604) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "entries", force: :cascade do |t|
+  create_table "telephones", force: :cascade do |t|
     t.string "phone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["phone_number"], name: "index_entries_on_phone_number"
+    t.index ["phone_number"], name: "index_telephones_on_phone_number"
   end
 
 end

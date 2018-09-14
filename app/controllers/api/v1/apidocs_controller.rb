@@ -26,12 +26,43 @@ module Api
         key :schemes , ['http']
       end
 
-      swagger_path '/auth' do
+      swagger_path '/telephones' do
 
+        operation :post do
+          key :summary, 'Getting new phone number'
+          key :description, 'Creating a new phone number'
+          key :operationId, 'createtelephone'
+          key :tags, [
+            'Telephones'
+          ]
+
+          parameter do
+            key :in, :body
+            key :name, 'body'
+            key :example, { "phone_number": "111-222-3333"} 
+          end
+
+          response 200 do
+            key :description, 'success response'
+            schema do
+              key :type, :array
+              items do
+                key :'$ref', :Telephone
+              end
+            end
+          end
+
+          response :default do
+            key :description, 'unexpected error'
+            schema do
+              key :'$ref', '#/definitions/ErrorModel'
+            end
+          end
+        end
       end
 
       SWAGGERED_CLASSES = [
-        Entry,
+        Telephone,
         ErrorModel,
         self,
       ].freeze
