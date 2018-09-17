@@ -1,23 +1,14 @@
-require 'rails_helper'
-RSpec.describe Api::V1::TelephonesController do
-  describe "POST #create" do
-    before :each do
-      request.env["HTTP_ACCEPT"] = 'application/json'
-    end
-    before do 
-      post "create"
-    end
-    
-    it "returns http success" do
-      expect(response).to have_http_status(:success)
-    end
+require "rails_helper"
 
-    it "JSON body response contains phone numbers" do
-      byebug
-      json_response = JSON.parse(response.body)
-      expect(hash_body.keys).to match_array([:phone_number])
-    end
+RSpec.describe "Phone management", :type => :request do
 
+  it "creates a phone" do
+    headers = {
+      "ACCEPT" => "application/json",
+    }
+    post "/api/v1/telephones", :headers => headers
+    expect(response.content_type).to eq("application/json")
+    expect(response).to have_http_status(:created)
+    expect(response.body).to include("telephone_number")
   end
-
 end

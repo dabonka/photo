@@ -9,7 +9,7 @@ module Api
         get_custom_value(phones_params[:phone_number])
         if @telephone.valid? 
           @telephone.save!
-          render :create
+          render :create, status: :created
         else
           render json: @telephone.errors.full_messages
         end
